@@ -4,7 +4,7 @@
 	 *  画面表示基底クラス(単件表示)
 	 * author      Kok
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * version     v 1.00 2016/02/04
+	 * since       2016/02/04
 	 */
 	class fwPBase00
 	{

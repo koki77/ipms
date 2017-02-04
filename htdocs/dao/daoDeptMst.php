@@ -5,7 +5,7 @@
 	 *
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * version     v 1.00 2016/02/04
+	 * since       2016/02/04
 	 */
 	class daoDeptMst
 	{
@@ -30,9 +30,9 @@
 			$this->deptid = $val;
 		}
 
-		public function setStatus($val)
+		public function setDelflg($val)
 		{
-			$this->status = $val;
+			$this->delflg = $val;
 		}
 
 		//値取得
@@ -46,9 +46,9 @@
 			return($this->deptnm);
 		}
 
-		public function getStatus()
+		public function getDelflg()
 		{
-			return($this->status);
+			return($this->delflg);
 		}
 
 		//初期化
@@ -64,7 +64,7 @@
 		{
 			$this->setDeptId($result["deptid"]);
 			$this->setDeptNm($result["deptnm"]);
-			$this->setStatus($result["status"]);
+			$this->setDelflg($result["delflg"]);
 		}
 	}
 ?>

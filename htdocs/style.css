@@ -1,7 +1,7 @@
 ﻿*
 {
 font-family: "Meiryo UI",monospace;
-font-size:12px;
+font-size:16px;
 }
 body
 {
@@ -89,6 +89,13 @@ margin-left: auto;
 margin-right: auto;
 }
 
+/*メニューボタン*/
+button.btn0
+{
+width:300px;
+font-size:24px;
+}
+
 /*画面機能ボタン*/
 button.btn1
 {
@@ -166,4 +173,3 @@ TD.BODY
 {
 background-color:#FFFACD;
 }
-

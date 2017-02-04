@@ -4,7 +4,7 @@
 	 *  メインメニュー
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * version     v 1.00 2016/02/04
+	 * since       2016/02/04
 	 */
 	//クラス定義部
 	class pSysMenuMain extends fwPBase00
@@ -46,13 +46,13 @@
 		protected function dspMain()
 		{
 ?>
-<button type="submit" name="SYS010" class="btn1" tabindex=010>入団者登録</button><br>
-<button type="submit" name="SYS110" class="btn1" tabindex=110>予算編成</button><br>
-<button type="submit" name="SYS120" class="btn1" tabindex=120>決算処理</button><br>
-<button type="submit" name="SYS130" class="btn1" tabindex=130>決算解除</button><br>
-<button type="submit" name="SYS140" class="btn1" tabindex=140>団費調定</button><br>
-<button type="submit" name="SYS900" class="btn1" tabindex=900>ユーザ管理</button><br>
-<button type="submit" name="SYS980" class="btn1" tabindex=980>パスワード変更</button><br>
+<button type="submit" name="SYS010" class="btn0" tabindex=010>IPアドレス取得</button><br>
+<button type="submit" name="SYS020" class="btn0" tabindex=010>IPアドレス返却</button><br>
+<button type="submit" name="SYS110" class="btn0" tabindex=110>ネットワーク登録</button><br>
+<button type="submit" name="SYS120" class="btn0" tabindex=110>ネットワーク編集</button><br>
+<button type="submit" name="SYS130" class="btn0" tabindex=110>ネットワーク削除</button><br>
+<button type="submit" name="SYS900" class="btn0" tabindex=900>ユーザ管理</button><br>
+<button type="submit" name="SYS980" class="btn0" tabindex=980>パスワード変更</button><br>
 <?php
 		}
 

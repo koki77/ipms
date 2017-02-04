@@ -4,7 +4,7 @@
 	 *  データベースアクセス基底クラス(主キーアクセス)
 	 * author      Koki.Okubo
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * version     v 1.00 2016/02/01
+	 * since       2016/02/04
 	 */
 	class fwDBase00
 	{
