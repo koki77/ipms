@@ -11,7 +11,7 @@
 	{
 		private $deptid;//部署コード
 		private $deptnm;//部署名
-		private $delflg;//ステータス
+		private $delflg;//削除フラグ
 
 		//初期処理
 		public function __construct()
