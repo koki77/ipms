@@ -1,0 +1,169 @@
+﻿*
+{
+font-family: "Meiryo UI",monospace;
+font-size:12px;
+}
+body
+{
+background-color:#FFFACD;
+}
+
+H1
+{
+font-size:32px;
+}
+
+H2
+{
+font-size:28px;
+}
+
+H3
+{
+font-size:24px;
+}
+
+H4
+{
+font-size:20px;
+}
+
+H5
+{
+font-size:16px;
+}
+
+/*基礎*/
+.base
+{
+width: 90%;
+margin: 0 auto;
+}
+
+
+/*ヘッダー*/
+div.header
+{
+height:70px;
+top:0px;
+}
+
+/*メインエリア*/
+div.main
+{
+width:90%;
+text-align:center;
+margin: 0 auto;
+}
+
+/*明細エリア*/
+div.list
+{
+width:100%;
+margin: 0 auto;
+overflow:auto;
+padding-left:30px;
+}
+
+/*ボタン配置エリア*/
+div.button
+{
+width:100%;
+margin: 0 auto;
+padding-left:30px;
+}
+
+/*フッターエリア*/
+div.footer
+{
+color:#FF0000;
+width:100%;
+margin: 0 auto;
+padding-left:30px;
+}
+
+/*テーブル*/
+table
+{
+margin-left: auto;
+margin-right: auto;
+}
+
+/*画面機能ボタン*/
+button.btn1
+{
+width:150px;
+}
+
+/*項目個別編集ボタン大*/
+button.btn2
+{
+width:120px;
+}
+
+/*項目個別編集ボタン中*/
+button.btn3
+{
+width:80px;
+}
+
+/*項目個別編集ボタン小*/
+button.btn4
+{
+width:50px;
+}
+
+/*項目個別編集ボタン極小*/
+button.btn5
+{
+width:35px;
+}
+
+/*入力エリア*/
+input
+{
+width:100%;
+}
+
+/*入力エリア数値*/
+input.Num
+{
+text-align:right;
+width:100%;
+}
+
+/* ヘッダ行の背景色 */
+TR.header {
+background-color: #87CEFA;
+height:25px;
+}
+
+/* 奇数行の背景色 */
+TR.color1 {
+background-color: #C9E2F8;
+height:25px;
+}
+
+/* 偶数行の背景色 */
+TR.color2 {
+background-color: #E3F0FB;
+height:25px;
+}
+
+/* フッタ行の背景色 */
+TR.footer {
+background-color: #87CEFA;
+height:25px;
+}
+
+/* 数値セル */
+TD.Num {
+text-align:right;
+}
+
+/* BODYと同背景色 */
+TD.BODY
+{
+background-color:#FFFACD;
+}
+
