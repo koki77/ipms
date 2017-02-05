@@ -15,31 +15,31 @@
 		protected $sqlu = "UPDATE msg set msgid = ?, msg = ? WHERE msgid = ?";
 		protected $sqld = "DELETE FROM msg WHERE msgid = ?";
 
-		//Dao����
+		//Dao生成
 		protected function createDao()
 		{
 			return(new daoMsg());
 		}
 
-		//�����L�[�ݒ�
+		//検索キー設定
 		public function setSelectPrm($msgid)
 		{
 			$this->prms = array($msgid);
 		}
 
-		//�ǉ��f�[�^�ݒ�
+		//追加データ設定
 		public function setInsertPrm($dao)
 		{
 			$this->prmi = array($dao->getMsgId(),$dao->getMsg());
 		}
 
-		//�X�V�f�[�^�ݒ�
+		//更新データ設定
 		public function setUpdatePrm($dao)
 		{
 			$this->prmu = array($dao->getMsgId(),$dao->getMsg(),$dao->getMsgId());
 		}
 
-		//�폜�L�[�ݒ�
+		//削除キー設定
 		public function setDeletePrm($msgid)
 		{
 			$this->prmd = array($msgid);

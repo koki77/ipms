@@ -8,6 +8,7 @@
  */
 	require_once("sub/sStdSub.php");
 	require_once("sub/sCstTbl.php");
+	require_once("sub/sAuthority.php");
 
 	function myAutoload($className)
 	{

@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * fBase01
+	 * fwFBase01
 	 *  画面表示機能基底クラス(一覧表示)
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52

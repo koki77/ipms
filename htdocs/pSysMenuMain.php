@@ -46,12 +46,27 @@
 		protected function dspMain()
 		{
 ?>
-<button type="submit" name="SYS010" class="btn0" tabindex=010>IPアドレス取得</button><br>
-<button type="submit" name="SYS020" class="btn0" tabindex=010>IPアドレス返却</button><br>
+<button type="submit" name="SYS010" class="btn0" tabindex=010>IPアドレス参照</button><br>
+<button type="submit" name="SYS020" class="btn0" tabindex=020>IPアドレス取得</button><br>
+<button type="submit" name="SYS030" class="btn0" tabindex=030>IPアドレス返却</button><br>
+<button type="submit" name="SYS100" class="btn0" tabindex=100>ネットワーク参照</button><br>
+<?php
+	if(authorityGet(NwAdmin) == FlgTrue || authorityGet(SysAdmin) == FlgTrue)
+	{
+ ?>
 <button type="submit" name="SYS110" class="btn0" tabindex=110>ネットワーク登録</button><br>
-<button type="submit" name="SYS120" class="btn0" tabindex=110>ネットワーク編集</button><br>
-<button type="submit" name="SYS130" class="btn0" tabindex=110>ネットワーク削除</button><br>
+<button type="submit" name="SYS120" class="btn0" tabindex=120>ネットワーク編集</button><br>
+<button type="submit" name="SYS130" class="btn0" tabindex=130>ネットワーク削除</button><br>
+<?php
+	}
+
+	if(authorityGet(DeptAdmin) == FlgTrue || authorityGet(SysAdmin) == FlgTrue)
+	{
+ ?>
 <button type="submit" name="SYS900" class="btn0" tabindex=900>ユーザ管理</button><br>
+<?php
+	}
+ ?>
 <button type="submit" name="SYS980" class="btn0" tabindex=980>パスワード変更</button><br>
 <?php
 		}

@@ -40,6 +40,7 @@
 			$flay->setUserId($_SESSION["userId"]);
 			$flay->run();
 			$_SESSION["userName"] = $flay->getDisplayUserName();
+			$_SESSION["deptId"] = $flay->getDeptId();
 			goMainMenu();
 		}else{
 			$disp = true;
@@ -51,6 +52,7 @@
 <head>
 <title>Login</title>
 <link rel="stylesheet" href="style.css" type="text/css">
+<script type="text/javascript" src="playFunc.js"></script>
 </head>
 <body>
 

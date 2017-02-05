@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/**
 	 * fwPBase00
 	 *  画面表示基底クラス(単件表示)
@@ -13,7 +13,6 @@
 		private $userName;
 		protected $title;
 		protected $flayCall;
-
 		//初期化
 		public function __construct($title)
 		{
@@ -33,17 +32,14 @@
 			$this->init();
 			$this->startProc();
 		}
-
 		//初期化処理
 		protected function init()
 		{
 		}
-
 		//開始処理
 		protected function startProc()
 		{
 		}
-
 		//画面表示
 		public function display()
 		{
@@ -55,7 +51,6 @@
 			$this->dspMain();
 			$this->dspFooter();
 		}
-
 		//ヘッダー表示
 		protected function dspHeader()
 		{
@@ -67,17 +62,18 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <link rel="stylesheet" href="style.css" type="text/css">
+<script type="text/javascript" src="playFunc.js"></script>
 </HEAD>
 <body>
 <form method="post" action="" name="main">
 <div class="base">
 
 <div class="header">
-<div style="float:right;width:20%;text-align:right;">
+<div class="header-user">
 <button type="submit" name="logout" class="btn1" tabindex=9999>ログアウト</button><BR>
 <?php print($this->userName);?>
 </div>
-<div style="float:right;width:60%;text-align:center;">
+<div class="header-main">
 <H1><?php print($this->title); ?></H1>
 </div>
 </div>
@@ -88,12 +84,10 @@
 <div class="main">
 <?php
 		}
-
 		//主表示領域表示
 		protected function dspMain()
 		{
 		}
-
 		//フッター表示
 		protected function dspFooter()
 		{
@@ -110,7 +104,6 @@
 </html>
 <?php
 		}
-
 		public function setMessage($msg)
 		{
 			if($this->msg == "")

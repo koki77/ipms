@@ -90,6 +90,7 @@
 				if($this->daoUserMst->getPassWd() == $this->passWd  && $this->daoUserMst->getDelFlg() == FlgOff)
 				{
 					$this->result = true;
+					authoritySet($this->daoUserMst);
 				}else{
 					$this->result = false;
 					$this->msg = getMsg($this->dbc,"SYS001");

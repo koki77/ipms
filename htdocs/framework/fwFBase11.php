@@ -1,6 +1,6 @@
 ﻿<?php
 	/**
-	 * fBase11
+	 * fwFBase11
 	 *  データ更新機能基底クラス(単体 更新)
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
