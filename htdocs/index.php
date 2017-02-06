@@ -52,7 +52,7 @@
 <head>
 <title>Login</title>
 <link rel="stylesheet" href="style.css" type="text/css">
-<script type="text/javascript" src="playFunc.js"></script>
+<script type="text/javascript" src="framework/playFunc.js"></script>
 </head>
 <body>
 

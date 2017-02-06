@@ -62,7 +62,14 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <link rel="stylesheet" href="style.css" type="text/css">
-<script type="text/javascript" src="playFunc.js"></script>
+<script type="text/javascript" src="framework/playFunc.js"></script>
+<script src="jquery/jquery-1.10.2.min.js"></script>
+<script src="jquery/jquery.floatThead.js"></script>
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery('table.headfloat').floatThead();
+	});
+</script>
 </HEAD>
 <body>
 <form method="post" action="" name="main">

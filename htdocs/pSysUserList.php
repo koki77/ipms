@@ -55,14 +55,17 @@
 		protected function dspMainTop()
 		{
 ?>
-<TABLE>
+<TABLE class="headfloat">
+<thead>
 <TR class="header">
-<TD width="200px" align="center">ユーザＩＤ</TD>
-<TD width="200px" align="center">部署名</TD>
-<TD width="200px" align="center">ユーザ名</TD>
-<TD class="BODY"></TD>
-<TD class="BODY"></TD>
+<TH width="200px" align="center">ユーザＩＤ</TH>
+<TH width="200px" align="center">部署名</TH>
+<TH width="200px" align="center">ユーザ名</TH>
+<TH class="BODY"></TH>
+<TH class="BODY"></TH>
 </TR>
+</thead>
+<tbody>
 <?php
 			$this->setMaxLine($this->flay->getCount());
 		}
@@ -71,6 +74,7 @@
 		protected function dspMainBottom()
 		{
 ?>
+</tbody>
 </TABLE>
 <?php
 		}
