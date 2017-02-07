@@ -11,7 +11,7 @@ php-mysql
 以下のパスに格納する
  jquery/jquery-1.10.2.min.js
  jquery/jquery.floatThead.js
-IE6対策で1.10.2を利用しているがjQueryサイトからは3.x.xしかダウンロードできないので
+IE8対策で1.10.2を利用しているがjQueryサイトからは3.x.xしかダウンロードできないので
 githubのjquery/jqueryから入手する
 
 httpd.confに以下を追記する

@@ -1,18 +1,23 @@
 <?php
 	/**
-	 * pSysUserList
-	 *  ユーザー一覧
+	 * pSysUserManage
+	 *  ユーザー管理
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
 	 * since       2016/02/04
 	 */
 	//クラス定義部
-	class pSysUserList extends fwPBase01
+	class pSysUserManage extends fwPBase01
 	{
 		protected function init()
 		{
 			$this->flay = new fSysUserList($_SESSION["userId"],$_SESSION["userName"]);
-			$this->flay->setDeptId(DeptAll);
+			if(authorityGet(SysAdmin) == FlgTrue)
+			{
+				$this->flay->setDeptId(DeptAll);
+			}else{
+				$this->flay->setDeptId($_SESSION["deptId"]);
+			}
 		}
 
 		//開始処理
@@ -58,11 +63,11 @@
 <TABLE class="headfloat">
 <thead>
 <TR class="header">
-<TH width="200px" align="center">ユーザＩＤ</TH>
-<TH width="200px" align="center">部署名</TH>
-<TH width="200px" align="center">ユーザ名</TH>
-<TH class="BODY"></TH>
-<TH class="BODY"></TH>
+<TD width="200px" align="center">ユーザＩＤ</TD>
+<TD width="200px" align="center">部署名</TD>
+<TD width="200px" align="center">ユーザ名</TD>
+<TD class="BODY"></TD>
+<TD class="BODY"></TD>
 </TR>
 </thead>
 <tbody>
@@ -101,7 +106,7 @@
 	}
 
 	//処理実行部
-	$play = new pSysUserList("ユーザ一覧");
+	$play = new pSysUserManage("ユーザ一覧");
 	$play->display();
 
 ?>
