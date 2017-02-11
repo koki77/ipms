@@ -39,7 +39,7 @@
 				goNext("pSysDeptChange.php");
 			}else if(isset($_POST["SYS980"])){
 				$_SESSION["SysUserId"] = $_SESSION["userId"];
-				$_SESSION["Mode"] = "UPDATE";
+				$_SESSION["Mode"] = "PASSWORD";
 				goNext("pSysUserEdit.php");
 			}
 		}

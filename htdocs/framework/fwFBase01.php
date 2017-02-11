@@ -11,6 +11,7 @@
 		protected $cnt;
 		protected $dlay;
 		protected $dao;
+		protected $max;
 
 		//DB検索
 		public function run()

@@ -20,7 +20,7 @@
 			//変数初期化
 			$this->userId = "";
 			$this->userName = "";
-			$this->deprId = "";
+			$this->deptId = "";
 			$this->deptName = "";
 
 			//ユーザ情報取得
@@ -34,7 +34,7 @@
 			{
 				goNext($_SESSION["SysPrev"]);
 			}else if(isset($_POST["update"])){
-				if($_SESSION["Mode"] == "UPDATE")
+				if($_SESSION["Mode"] == "PASSWORD")
 				{
 					$flayEdit = new fSysPasswdUpdate($_SESSION["userId"],$_SESSION["userName"]);
 				}else{
@@ -48,34 +48,57 @@
 				if($flayEdit->getResult() == true)
 				{
 					$_SESSION["SysMsg"] = $flayEdit->getMessage();
-					if($_SESSION["Mode"] == "UPDATE")
-					{
-						goNext($_SESSION["SysPrev"]);
-					}else{
-						goNext("pSysUserList.php");
-					}
+					goNext($_SESSION["SysPrev"]);
 				}else{
 					$this->setMessage($flayEdit->getMessage());
 				}
 			}
-			if($_SESSION["Mode"] == "UPDATE")
+
+			if($_SESSION["Mode"] == "PASSWORD")
 			{
 				$this->flay->setUserId($_SESSION["SysUserId"]);
 				$this->title = "パスワード変更";
-			}else{
+			}else if($_SESSION["Mode"] == "INSERT"){
 				$this->flayCall = false;
 				$this->title = "ユーザ登録";
+			}else if($_SESSION["Mode"] == "UPDATE"){
+				$this->flay->setUserId($_SESSION["SysUserId"]);
+				$this->title = "ユーザ情報変更";
+			}else if($_SESSION["Mode"] == "DELETE"){
+				$this->flay->setUserId($_SESSION["SysUserId"]);
+				$this->title = "ユーザ削除";
+			}else{
+				//部署変更
+				$this->flay->setUserId($_SESSION["SysUserId"]);
+				$this->title = "部署変更";
 			}
+
 		}
 
 		//主表示領域表示
 		protected function dspMain()
 		{
+			if(isset($_POST["return"],$_POST["update"]) == FALSE)
+			{
+				//初期表示
+				if($_SESSION["Mode"] == "UPDATE"){
+					$this->userName = $this->flay->getUserName();
+				}else	if($_SESSION["Mode"] == "DEPTCHNG"){
+					$this->deptId = $this->flay->getDeptId();
+				}
+			}
 ?>
 <TABLE>
 <?php
-			if($_SESSION["Mode"] == "UPDATE")
-			{
+				if($_SESSION["Mode"] == "INSERT")
+				{
+?>
+<TR>
+<TD align="right">ユーザＩＤ：</TD>
+<TD><input type="text" name="userid" value="<?php print($this->userId);?>" maxlength="<?php print(UserIdLen) ?>"></TD>
+</TR>
+<?php
+				}else{
 ?>
 <TR>
 <TD align="right">ユーザＩＤ：</TD>
@@ -84,21 +107,70 @@
 <input type="hidden" name="userid" value="<?php print($_SESSION["SysUserId"]);?>">
 </TD>
 </TR>
-<TR><TD align="right">ユーザ名：</TD><TD><?php print($this->flay->getUserName());?></TD></TR>
-<TR><TD align="right">部署名：</TD><TD><?php print($this->flay->getDeptName());?></TD></TR>
+<?php
+				}
+
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE")
+				{
+?>
+<TR>
+<TD align="right">ユーザ名：</TD>
+<TD><input type="text" name="usernm" value="<?php print($this->userName);?>" maxlength="<?php print(NameLen) ?>"></TD>
+</TR>
 <?php
 				}else{
 ?>
-<TR>
-<TD align="right">ユーザＩＤ：</TD>
-<TD><input type="text" name="userid" value="<?php print($this->userId);?>" maxlength="<?php print(UserIdLen) ?>"></TD>
-</TR>
-<TR>
-<TD align="right">ユーザ名：</TD>
-<TD><?php print($_SESSION["SysKName"]);?></TD>
-</TR>
+<TR><TD align="right">ユーザ名：</TD><TD><?php print($this->flay->getUserName());?></TD></TR>
 <?php
 				}
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "DEPTCHNG")
+				{
+?>
+<TR>
+<TD align="right">部署名：</TD>
+<TD>
+<?php
+					$flayDept = new fSysDeptList($_SESSION["userId"],$_SESSION["userName"]);
+					if(authorityGet(SysAdmin) == FlgTrue)
+					{
+						$flayDept->setDeptId(DeptAll);
+						$flayDept->run();
+						$cnt = 0;
+?>
+<select name="deptId">
+<?php
+					while ($flayDept->getCount() > $cnt) {
+							if($flayDept->getDeptId($cnt) == $this->deptId)
+							{
+								$sel = "selected";
+							}else{
+								$sel = "";
+							}
+?>
+<option value="<?php print($flayDept->getDeptId($cnt));?>" <?php print($sel);?>><?php print($flayDept->getDeptName($cnt));?></option>
+<?php
+							$cnt++;
+						}
+?>
+</select>
+<?php
+					}else{
+						$flayDept->setDeptId($_SESSION["deptId"]);
+						$flayDept->run();
+						print($flayDept->getDeptName(0));
+					}
+?>
+</TD>
+</TR>
+<?php
+				}else{
+?>
+<TR><TD align="right">部署名：</TD><TD><?php print($this->flay->getDeptName());?></TD></TR>
+<?php
+				}
+
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE" or $_SESSION["Mode"] == "PASSWORD")
+				{
 ?>
 <TR>
 <TD align="right">パスワード：</TD><TD><input type="password" name="pass1" maxlength="<?php print(PassLen) ?>"></TD>
@@ -106,20 +178,48 @@
 <TR>
 <TD align="right">（確認用）パスワード：</TD><TD><input type="password" name="pass2" maxlength="<?php print(PassLen) ?>"></TD>
 </TR>
-</TABLE>
 <?php
-				if($_SESSION["Mode"] == "UPDATE")
+				}
+
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE")
 				{
+					if(authorityGet(SysAdmin) == FlgTrue){
 ?>
-			<button type="submit" name="update" class="btn1">更新</button>
+<TR>
+<TD align="right">システム管理者：</TD><TD align="left"><input type="checkbox" name="sysAdmin"></TD>
+</TR>
 <?php
-				}else{
+					}
 ?>
-			<button type="submit" name="update" class="btn1">追加</button>
+<TR>
+<TD align="right">部署管理者：</TD><TD align="left"><input type="checkbox" name="deptAdmin"></TD>
+</TR>
+<TR>
+<TD align="right">ネットワーク管理者：</TD><TD align="left"><input type="checkbox" name="nwAdmin"></TD>
+</TR>
+
 <?php
 				}
 ?>
-			<button type="submit" name="return" class="btn1">戻る</button>
+</TABLE>
+<?php
+
+				if($_SESSION["Mode"] == "INSERT")
+				{
+?>
+<button type="submit" name="update" class="btn1">追加</button>
+<?php
+				}else if($_SESSION["Mode"] == "DELETE"){
+?>
+<button type="submit" name="update" class="btn1">削除</button>
+<?php
+				}else{
+?>
+<button type="submit" name="update" class="btn1">更新</button>
+<?php
+				}
+?>
+<button type="submit" name="return" class="btn1">戻る</button>
 <?php
 		}
 
