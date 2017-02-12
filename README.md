@@ -59,6 +59,7 @@
     </Directory>
     ```
 1. httpdの起動
+
     ```sh
     [root@CentOS7 ~]# systemctl start httpd.service
     ```
@@ -72,11 +73,13 @@
     character-set-server=utf8
     ```
 1. MariaDBの起動
+
     ```sh
     [root@CentOS7 htdocs]# systemctl start  mariadb.service
     ```
 
 1. MariaDBの初期設定
+
     ```sh
     [root@CentOS7 etc]# mysql_secure_installation
     ```
@@ -84,12 +87,14 @@
 ### ipms用DBの準備
 
 1. DBの初期設定
+
     ```sh
     [root@CentOS7 ~]# /var/www/html/ipms/sql
     [root@CentOS7 sql]# mysql -u root -p  < init_db.sql
     Enter password:
     [root@CentOS7 sql]#
     ```
+
 1. テーブルの作成
 
     ```sh
