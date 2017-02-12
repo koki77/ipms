@@ -1,21 +1,21 @@
-﻿<?php
+<?php
 	/**
-	 * fwFBase11
-	 *  データ更新機能基底クラス(単体 更新)
+	 * fwFBase10
+	 *  データ更新機能基底クラス(単体 追加)
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * since       2016/02/04
+	 * since       2016/02/12
 	 */
-	class fwFBase11 extends fwFBase00
+	class fwFBase10 extends fwFBase00
 	{
 		protected $dlay;
 		protected $dao;
-		protected $updateMsg = "SYS002";
+		protected $insertMsg = "SYS002";
 		protected $errorMsg = "SYS003";
 		protected $result;
 
 
-		//更新処理
+		//追加処理
 		public function run()
 		{
 			$this->result = false;
@@ -25,11 +25,11 @@
 				//関連チェック
 				if($this->relationCheck() == true)
 				{
-					$this->setUpdateData();
-					$this->dlay->setUpdatePrm($this->dao);
-					if($this->dlay->update() == true)
+					$this->setInsertData();
+					$this->dlay->setInsertPrm($this->dao);
+					if($this->dlay->insert() == true)
 					{
-						$this->msg = getMsg($this->dbc,$this->updateMsg);
+						$this->msg = getMsg($this->dbc,$this->insertMsg);
 						$this->result = true;
 						$this->dbc->Commit();
 					}else{
@@ -52,8 +52,8 @@
 			return(true);
 		}
 
-		//更新データ設定
-		protected function setUpdateData()
+		//追加データ設定
+		protected function setInsertData()
 		{
 		}
 

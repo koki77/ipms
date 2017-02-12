@@ -15,7 +15,9 @@
 	//権限定数
 	const SysAdmin = "sysadmin";
 	const DeptAdmin = "auth01";
+	const DeptAdminIdx = 1;
 	const NwAdmin = "auth02";
+	const NwAdminIdx = 2;
 
 	//定数定義
 	const FlgOn = 1;

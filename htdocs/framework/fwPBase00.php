@@ -72,7 +72,7 @@
 </script>
 </HEAD>
 <body>
-<form method="post" action="" name="main">
+<form method="post" action="" name="main"  style="display: inline">
 <div class="base">
 
 <div class="header">

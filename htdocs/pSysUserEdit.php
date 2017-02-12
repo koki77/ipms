@@ -13,6 +13,9 @@
 		private $userName;
 		private $deptId;
 		private $deptName;
+		private $sysadmin;
+		private $deptAdmin;
+		private $nwAdmin;
 
 		//初期化処理
 		protected function init()
@@ -22,6 +25,9 @@
 			$this->userName = "";
 			$this->deptId = "";
 			$this->deptName = "";
+			$this->sysadmin = FlgFalse;
+			$this->deptAdmin = FlgFalse;
+			$this->nwAdmin = FlgFalse;
 
 			//ユーザ情報取得
 			$this->flay = new fSysUserDisplay($_SESSION["userId"],$_SESSION["userName"]);
@@ -37,13 +43,65 @@
 				if($_SESSION["Mode"] == "PASSWORD")
 				{
 					$flayEdit = new fSysPasswdUpdate($_SESSION["userId"],$_SESSION["userName"]);
-				}else{
+				}else if($_SESSION["Mode"] == "INSERT"){
 					$flayEdit = new fSysUserAdd($_SESSION["userId"],$_SESSION["userName"]);
+				}else if($_SESSION["Mode"] == "UPDATE"){
+					$flayEdit = new fSysUserUpdate($_SESSION["userId"],$_SESSION["userName"]);
+				}else if($_SESSION["Mode"] == "DELETE"){
+					$flayEdit = new fSysUserDelete($_SESSION["userId"],$_SESSION["userName"]);
+				}else{
+					$flayEdit = new fSysUserDeptChange($_SESSION["userId"],$_SESSION["userName"]);
 				}
 				$this->userId = $_POST["userid"];
 				$flayEdit->setUserId($_POST["userid"]);
-				$flayEdit->setPassword1($_POST["pass1"]);
-				$flayEdit->setPassword2($_POST["pass2"]);
+				if($_SESSION["Mode"] == "PASSWORD" or $_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE")
+				{
+					$flayEdit->setPassword1($_POST["pass1"]);
+					$flayEdit->setPassword2($_POST["pass2"]);
+				}
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE")
+				{
+					$this->userName = $_POST["usernm"];
+					$flayEdit->setUserName($_POST["usernm"]);
+					$this->sysadmin = FlgFalse;
+					$this->deptAdmin = FlgFalse;
+					$this->nwAdmin = FlgFalse;
+					if(isset($_POST["auth"]))
+					{
+						while(list($key,$val) = each($_POST["auth"]))
+						{
+							switch($val)
+							{
+								case "sysadmin":
+									$this->sysadmin = FlgTrue;
+									break;
+								case "deptAdmin":
+									$this->deptAdmin = FlgTrue;
+									break;
+								case "nwAdmin":
+									$this->nwAdmin = FlgTrue;
+									break;
+							}
+						}
+					}
+					if(authorityGet(SysAdmin) == FlgFalse)
+					{
+						$this->sysadmin = $_POST["sysadmin"];
+					}
+					$flayEdit->setSysadmin($this->sysadmin);
+					$flayEdit->setAuth(DeptAdminIdx,$this->deptAdmin);
+					$flayEdit->setAuth(NwAdminIdx,$this->nwAdmin);
+				}
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "DEPTCHNG")
+				{
+					if(authorityGet(SysAdmin) == FlgTrue)
+					{
+						$this->deptid = $_POST["deptId"];
+						$flayEdit->setDeptId($_POST["deptId"]);
+					}else{
+						$flayEdit->setDeptId($_SESSION["deptId"]);
+					}
+				}
 				$flayEdit->run();
 				if($flayEdit->getResult() == true)
 				{
@@ -78,11 +136,14 @@
 		//主表示領域表示
 		protected function dspMain()
 		{
-			if(isset($_POST["return"],$_POST["update"]) == FALSE)
+			if(isset($_POST["return"]) == FALSE and isset($_POST["update"]) == FALSE)
 			{
 				//初期表示
 				if($_SESSION["Mode"] == "UPDATE"){
 					$this->userName = $this->flay->getUserName();
+					$this->sysadmin = $this->flay->getSysadmin();
+					$this->deptAdmin = $this->flay->getAuth(DeptAdminIdx);
+					$this->nwAdmin = $this->flay->getAuth(NwAdminIdx);
 				}else	if($_SESSION["Mode"] == "DEPTCHNG"){
 					$this->deptId = $this->flay->getDeptId();
 				}
@@ -183,21 +244,56 @@
 
 				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE")
 				{
-					if(authorityGet(SysAdmin) == FlgTrue){
+					if(authorityGet(SysAdmin) == FlgTrue)
+					{
+						if($this->sysadmin == FlgTrue)
+						{
+							$chk = "checked=\"checked\"";
+						}else{
+							$chk = "";
+						}
 ?>
 <TR>
-<TD align="right">システム管理者：</TD><TD align="left"><input type="checkbox" name="sysAdmin"></TD>
+<TD align="right">システム管理者：</TD>
+<TD>
+<input type="checkbox" name="auth[]" value="sysadmin" <?php print($chk); ?> />
+</TD>
 </TR>
 <?php
+					}else{
+?>
+<input type="hidden" name="sysadmin" value="<?php print($this->sysadmin);?>">
+<?php
+					}
+
+					if($this->deptAdmin == FlgTrue)
+					{
+						$chk = "checked=\"checked\"";
+					}else{
+						$chk = "";
 					}
 ?>
 <TR>
-<TD align="right">部署管理者：</TD><TD align="left"><input type="checkbox" name="deptAdmin"></TD>
+<TD align="right">部門管理者：</TD>
+<TD>
+<lable><input type="checkbox" name="auth[]" value="deptAdmin"  <?php print($chk); ?> />
+</TD>
 </TR>
-<TR>
-<TD align="right">ネットワーク管理者：</TD><TD align="left"><input type="checkbox" name="nwAdmin"></TD>
-</TR>
+<?php
 
+					if($this->nwAdmin == FlgTrue)
+					{
+						$chk = "checked=\"checked\"";
+					}else{
+						$chk = "";
+					}
+?>
+<TR>
+<TD align="right">ネットワーク管理者：</TD>
+<TD>
+<lable><input type="checkbox" name="auth[]" value="nwAdmin"  <?php print($chk); ?> />
+</TD>
+</TR>
 <?php
 				}
 ?>
