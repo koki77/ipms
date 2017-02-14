@@ -170,7 +170,7 @@
 			return(true);
 		}
 
-		//追加データ設定
+		//更新データ設定
 		protected function setUpdateData()
 		{
 			$this->dlay = new dUserMst00($this->dbc);

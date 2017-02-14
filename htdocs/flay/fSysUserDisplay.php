@@ -98,7 +98,8 @@
 				case 10:
 					return($this->auth10);
 					break;
-			}		}
+			}		
+		}
 
 		//初期化処理
 		protected function init()

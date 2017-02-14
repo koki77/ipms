@@ -35,7 +35,7 @@
 							$this->result = true;
 							$this->dbc->Commit();
 						}else{
-							$this->msg = getMsg($this->dbc,$this->errorinsertMsg);
+							$this->msg = getMsg($this->dbc,$this->errorMsg);
 							$this->dbc->RollBack();
 						}
 					}else{
@@ -47,7 +47,7 @@
 							$this->result = true;
 							$this->dbc->Commit();
 						}else{
-							$this->msg = getMsg($this->dbc,$this->errorinsertMsg);
+							$this->msg = getMsg($this->dbc,$this->errorMsg);
 							$this->dbc->RollBack();
 						}
 					}

@@ -32,6 +32,7 @@
 	const NaiyoLen = 15;
 	const MsgLen = 50;
 	const NameLen = 10;
+	const DeptLen = 40;
 	const YYLen = 4;
 	const MMLen = 2;
 	const DDLen = 2;

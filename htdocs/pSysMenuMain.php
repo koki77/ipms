@@ -37,6 +37,8 @@
 				goNext("pSysUserManage.php");
 			}else if(isset($_POST["SYS910"])){
 				goNext("pSysDeptChange.php");
+			}else if(isset($_POST["SYS920"])){
+				goNext("pSysDeptManage.php");
 			}else if(isset($_POST["SYS980"])){
 				$_SESSION["SysUserId"] = $_SESSION["userId"];
 				$_SESSION["Mode"] = "PASSWORD";
@@ -67,6 +69,7 @@
  ?>
 <button type="submit" name="SYS900" class="btn0" tabindex=900>ユーザ管理</button><br>
 <button type="submit" name="SYS910" class="btn0" tabindex=910>部署変更</button><br>
+<button type="submit" name="SYS920" class="btn0" tabindex=920>部署管理</button><br>
 <?php
 	}
  ?>

@@ -1,36 +1,36 @@
 <?php
 	/**
-	 * fSysUserDelete
-	 *  ユーザー削除
+	 * fSysDeptDelete
+	 *  部署削除
 	 *
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * since       2016/02/12
+	 * since       2016/02/15
 	 */
-	class fSysUserDelete extends fwFBase11
+	class fSysDeptDelete extends fwFBase11
 	{
 		//変数宣言
-		private $userId;
-		protected $updateMsg = "SYS019";
+		private $deptId;
+		protected $updateMsg = "SYS020";
 
 		//初期化処理
 		protected function init()
 		{
-			$this->userId = "";
+			$this->deptId = "";
 		}
 
 		//値設定
-		public function setUserId($val)
+		public function setDeptId($val)
 		{
-			$this->userId = $val;
+			$this->deptId = $val;
 		}
 
 		//関連チェック
 		protected function relationCheck()
 		{
 			//データ存在チェック
-			$dlayChk = new dUserMst00($this->dbc);
-			$dlayChk->setSelectPrm($this->userId);
+			$dlayChk = new dDeptMst00($this->dbc);
+			$dlayChk->setSelectPrm($this->deptId);
 			$this->dao = $dlayChk->select();
 			if($this->dao == null)
 			{
@@ -50,7 +50,7 @@
 		//削除データ設定
 		protected function setUpdateData()
 		{
-			$this->dlay = new dUserMst00($this->dbc);
+			$this->dlay = new dDeptMst00($this->dbc);
 			$this->dao->setDelFlg(FlgTrue);
 		}
 

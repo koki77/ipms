@@ -11,7 +11,7 @@
 	class dDeptMst00 extends fwDBase00
 	{
 		protected $sqls = "SELECT * FROM dept_mst WHERE deptid = ?";
-		protected $sqli = "INSERT INTO dept_mst VALUES (?,?)";
+		protected $sqli = "INSERT INTO dept_mst (deptnm,delflg) VALUES (?,?)";
 		protected $sqlu = "UPDATE dept_mst set deptid = ?, deptnm = ?, delflg = ? WHERE deptid = ?";
 		protected $sqld = "DELETE FROM dept_mst WHERE deptid = ?";
 

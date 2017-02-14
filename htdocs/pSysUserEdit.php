@@ -16,6 +16,7 @@
 		private $sysadmin;
 		private $deptAdmin;
 		private $nwAdmin;
+		private $delFlg;
 
 		//初期化処理
 		protected function init()
@@ -28,6 +29,7 @@
 			$this->sysadmin = FlgFalse;
 			$this->deptAdmin = FlgFalse;
 			$this->nwAdmin = FlgFalse;
+			$this->delFlg = FlgFalse;
 
 			//ユーザ情報取得
 			$this->flay = new fSysUserDisplay($_SESSION["userId"],$_SESSION["userName"]);
@@ -63,6 +65,20 @@
 				{
 					$this->userName = $_POST["usernm"];
 					$flayEdit->setUserName($_POST["usernm"]);
+				}
+
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "DEPTCHNG")
+				{
+					if(authorityGet(SysAdmin) == FlgTrue)
+					{
+						$this->deptid = $_POST["deptId"];
+						$flayEdit->setDeptId($_POST["deptId"]);
+					}else{
+						$flayEdit->setDeptId($_SESSION["deptId"]);
+					}
+				}
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE" or $_SESSION["Mode"] == "DEPTCHNG")
+				{
 					$this->sysadmin = FlgFalse;
 					$this->deptAdmin = FlgFalse;
 					$this->nwAdmin = FlgFalse;
@@ -91,16 +107,6 @@
 					$flayEdit->setSysadmin($this->sysadmin);
 					$flayEdit->setAuth(DeptAdminIdx,$this->deptAdmin);
 					$flayEdit->setAuth(NwAdminIdx,$this->nwAdmin);
-				}
-				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "DEPTCHNG")
-				{
-					if(authorityGet(SysAdmin) == FlgTrue)
-					{
-						$this->deptid = $_POST["deptId"];
-						$flayEdit->setDeptId($_POST["deptId"]);
-					}else{
-						$flayEdit->setDeptId($_SESSION["deptId"]);
-					}
 				}
 				$flayEdit->run();
 				if($flayEdit->getResult() == true)
@@ -139,13 +145,25 @@
 			if(isset($_POST["return"]) == FALSE and isset($_POST["update"]) == FALSE)
 			{
 				//初期表示
-				if($_SESSION["Mode"] == "UPDATE"){
+				if($_SESSION["Mode"] == "UPDATE")
+				{
 					$this->userName = $this->flay->getUserName();
 					$this->sysadmin = $this->flay->getSysadmin();
 					$this->deptAdmin = $this->flay->getAuth(DeptAdminIdx);
 					$this->nwAdmin = $this->flay->getAuth(NwAdminIdx);
-				}else	if($_SESSION["Mode"] == "DEPTCHNG"){
+				}else	if($_SESSION["Mode"] == "DEPTCHNG")
+				{
 					$this->deptId = $this->flay->getDeptId();
+					$this->sysadmin = $this->flay->getSysadmin();
+					$this->deptAdmin = FlgFalse;
+					$this->nwAdmin = FlgFalse;
+				}else if($_SESSION["Mode"] == "DELETE")
+				{
+					$flayCheck = new fSysUserDeleteCheck($_SESSION["userId"],$_SESSION["userName"]);
+					$flayCheck->setUserId($_SESSION["SysUserId"]);
+					$flayCheck->run();
+					$this->setMessage($flayCheck->getMessage());
+					$this->delFlg = $flayCheck->getDelFlg();
 				}
 			}
 ?>
@@ -242,7 +260,7 @@
 <?php
 				}
 
-				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE")
+				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE" or $_SESSION["Mode"] == "DEPTCHNG")
 				{
 					if(authorityGet(SysAdmin) == FlgTrue)
 					{
@@ -306,9 +324,12 @@
 <button type="submit" name="update" class="btn1">追加</button>
 <?php
 				}else if($_SESSION["Mode"] == "DELETE"){
+					if($this->delFlg == FlgTrue)
+					{
 ?>
 <button type="submit" name="update" class="btn1">削除</button>
 <?php
+					}
 				}else{
 ?>
 <button type="submit" name="update" class="btn1">更新</button>
