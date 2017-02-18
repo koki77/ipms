@@ -44,6 +44,7 @@
 			{
 				$this->passWdCheck();
 			}
+			$this->dbc->Commit();
 		}
 
 		//入力チェック

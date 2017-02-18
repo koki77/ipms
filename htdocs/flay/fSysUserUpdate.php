@@ -120,6 +120,12 @@
 				return(false);
 			}
 
+			if(checkName($this->userName) == false)
+			{
+				$this->msg = getMsg($this->dbc,"SYS015");
+				return(false);
+			}
+
 			if($this->passWd1 != "")
 			{
 				if(checkAscii($this->passWd1) == false)

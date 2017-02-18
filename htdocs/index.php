@@ -25,18 +25,18 @@
 	$_SESSION["MainMap"] = "pSysMenuMain.php";
 
 	$disp = false;
-	$fSysLogin = new fSysLogin("dummy","dummy");
 
 	//認証処理
 	if(isset($_POST["login"]))
 	{
+		$fSysLogin = new fSysLogin("dummy");
 		$fSysLogin->setUserId($_POST["userid"]);
 		$fSysLogin->setPassword($_POST["pass"]);
 		$fSysLogin->run();
 		if($fSysLogin->getResult())
 		{
 			$_SESSION["userId"] = $_POST["userid"];
-			$flay = new fSysUserDisplay("dummy","dummy");
+			$flay = new fSysUserDisplay("dummy");
 			$flay->setUserId($_SESSION["userId"]);
 			$flay->run();
 			$_SESSION["userName"] = $flay->getDisplayUserName();
@@ -86,7 +86,10 @@
 
 <div class="footer" align="center">
 <?php
-		print($fSysLogin->getMessage());
+		if($disp == true)
+		{
+			print($fSysLogin->getMessage());
+		}
 ?>
 </div>
 

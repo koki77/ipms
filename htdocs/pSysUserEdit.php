@@ -32,7 +32,12 @@
 			$this->delFlg = FlgFalse;
 
 			//ユーザ情報取得
-			$this->flay = new fSysUserDisplay($_SESSION["userId"],$_SESSION["userName"]);
+			if($_SESSION["Mode"] == "INSERT")
+			{
+				$this->flayCall = false;				
+			}else{
+				$this->flay = new fSysUserDisplay($_SESSION["userId"]);
+			}
 		}
 
 		//開始処理
@@ -44,15 +49,15 @@
 			}else if(isset($_POST["update"])){
 				if($_SESSION["Mode"] == "PASSWORD")
 				{
-					$flayEdit = new fSysPasswdUpdate($_SESSION["userId"],$_SESSION["userName"]);
+					$flayEdit = new fSysPasswdUpdate($_SESSION["userId"]);
 				}else if($_SESSION["Mode"] == "INSERT"){
-					$flayEdit = new fSysUserAdd($_SESSION["userId"],$_SESSION["userName"]);
+					$flayEdit = new fSysUserAdd($_SESSION["userId"]);
 				}else if($_SESSION["Mode"] == "UPDATE"){
-					$flayEdit = new fSysUserUpdate($_SESSION["userId"],$_SESSION["userName"]);
+					$flayEdit = new fSysUserUpdate($_SESSION["userId"]);
 				}else if($_SESSION["Mode"] == "DELETE"){
-					$flayEdit = new fSysUserDelete($_SESSION["userId"],$_SESSION["userName"]);
+					$flayEdit = new fSysUserDelete($_SESSION["userId"]);
 				}else{
-					$flayEdit = new fSysUserDeptChange($_SESSION["userId"],$_SESSION["userName"]);
+					$flayEdit = new fSysUserDeptChange($_SESSION["userId"]);
 				}
 				$this->userId = $_POST["userid"];
 				$flayEdit->setUserId($_POST["userid"]);
@@ -123,7 +128,6 @@
 				$this->flay->setUserId($_SESSION["SysUserId"]);
 				$this->title = "パスワード変更";
 			}else if($_SESSION["Mode"] == "INSERT"){
-				$this->flayCall = false;
 				$this->title = "ユーザ登録";
 			}else if($_SESSION["Mode"] == "UPDATE"){
 				$this->flay->setUserId($_SESSION["SysUserId"]);
@@ -159,7 +163,7 @@
 					$this->nwAdmin = FlgFalse;
 				}else if($_SESSION["Mode"] == "DELETE")
 				{
-					$flayCheck = new fSysUserDeleteCheck($_SESSION["userId"],$_SESSION["userName"]);
+					$flayCheck = new fSysUserDeleteCheck($_SESSION["userId"]);
 					$flayCheck->setUserId($_SESSION["SysUserId"]);
 					$flayCheck->run();
 					$this->setMessage($flayCheck->getMessage());
@@ -209,7 +213,7 @@
 <TD align="right">部署名：</TD>
 <TD>
 <?php
-					$flayDept = new fSysDeptList($_SESSION["userId"],$_SESSION["userName"]);
+					$flayDept = new fSysDeptList($_SESSION["userId"]);
 					if(authorityGet(SysAdmin) == FlgTrue)
 					{
 						$flayDept->setDeptId(DeptAll);

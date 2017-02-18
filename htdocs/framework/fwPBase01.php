@@ -58,11 +58,6 @@
 		//明細表示
 		private function dspList()
 		{
-?>
-<!--</div>
-<div class="list" style="height:<?php //print($this->listHeight);?>;">
-<TABLE>-->
-<?php
 			$this->cnt = 0;
 			while($this->max > $this->cnt)
 			{

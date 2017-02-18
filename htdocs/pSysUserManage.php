@@ -11,7 +11,7 @@
 	{
 		protected function init()
 		{
-			$this->flay = new fSysUserList($_SESSION["userId"],$_SESSION["userName"]);
+			$this->flay = new fSysUserList($_SESSION["userId"]);
 			if(authorityGet(SysAdmin) == FlgTrue)
 			{
 				$this->flay->setDeptId(DeptAll);

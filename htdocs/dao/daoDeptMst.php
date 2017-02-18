@@ -56,7 +56,7 @@
 		{
 			$this->deptid = 0;
 			$this->deptnm = "";
-			$this->status = "";
+			$this->delflg = FlgTrue;
 		}
 
 		//Dao編集

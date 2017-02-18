@@ -13,7 +13,8 @@
 		protected function init()
 		{
 			//仮置き
-			$this->flay = new fwFBase00("dummy","dummy");
+			$this->flayCall = false;
+			//$this->flay = new fwFBase00("dummy");
 		}
 
 		//開始処理
@@ -23,16 +24,7 @@
 			{
 				goNext("pMemMemberAdd.php");
 			}else if(isset($_POST["SYS110"])){
-				$_SESSION["Mode"] = "YOSAN";
-				goNext("pKaiKaikeiList.php");
-			}else if(isset($_POST["SYS120"])){
-				$_SESSION["Mode"] = "KESSAN";
-				goNext("pKaiKaikeiList.php");
-			}else if(isset($_POST["SYS130"])){
-				$_SESSION["Mode"] = "KARI";
-				goNext("pKaiKaikeiList.php");
-			}else if(isset($_POST["SYS140"])){
-				goNext("pKaiDanpiSet.php");
+				goNext("pNetNw1Manage.php");
 			}else if(isset($_POST["SYS900"])){
 				goNext("pSysUserManage.php");
 			}else if(isset($_POST["SYS910"])){
@@ -58,9 +50,7 @@
 	if(authorityGet(NwAdmin) == FlgTrue || authorityGet(SysAdmin) == FlgTrue)
 	{
  ?>
-<button type="submit" name="SYS110" class="btn0" tabindex=110>ネットワーク登録</button><br>
-<button type="submit" name="SYS120" class="btn0" tabindex=120>ネットワーク編集</button><br>
-<button type="submit" name="SYS130" class="btn0" tabindex=130>ネットワーク削除</button><br>
+<button type="submit" name="SYS110" class="btn0" tabindex=110>ネットワーク管理</button><br>
 <?php
 	}
 

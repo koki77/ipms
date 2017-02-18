@@ -10,16 +10,14 @@
 	{
 		protected $dbc;
 		protected $uId;
-		protected $uName;
 		protected $msg;
 
-		public function __construct($userid,$userName)
+		public function __construct($userid)
 		{
-			$this->init();
 			$this->uId = $userid;
-			$this->uName = $userName;
 			$this->msg = "";
 			$this->dbc = new dDbCtl();
+			$this->init();
 		}
 
 		//初期化処理

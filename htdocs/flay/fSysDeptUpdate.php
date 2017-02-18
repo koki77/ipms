@@ -41,6 +41,12 @@
 				return(false);
 			}
 
+			if(checkName($this->deptName) == false)
+			{
+				$this->msg = getMsg($this->dbc,"SYS015");
+				return(false);
+			}
+
 			return(true);
 		}
 

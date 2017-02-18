@@ -28,15 +28,14 @@
 
 	const UserIdLen = 20;
 	const PassLen = 20;
-	const MsgIdLen = 6;
-	const NaiyoLen = 15;
-	const MsgLen = 50;
 	const NameLen = 10;
 	const DeptLen = 40;
+	const NwLen = 40;
+	const NwTextLen = 100;
+	const SortInterval = 10;
 	const YYLen = 4;
 	const MMLen = 2;
 	const DDLen = 2;
 	const GkLen = 7;
-	const KosuLen = 3;
 
 ?>

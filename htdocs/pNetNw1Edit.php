@@ -1,30 +1,32 @@
 ﻿<?php
 	/**
-	 * pSysDeptEdit
-	 *  部署編集
+	 * pNetNw1Edit
+	 *  大分類ネットワークマスタ編集
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * since       2016/02/14
+	 * since       2016/02/17
 	 */
 	//クラス定義部
-	class pSysDeptEdit extends fwPBase00
+	class pNetNw1Edit extends fwPBase00
 	{
-		private $deptId;
-		private $deptName;
+		private $nw1Id;
+		private $nwName;
+		private $nwText;
 
 		//初期化処理
 		protected function init()
 		{
 			//変数初期化
-			$this->deptId = "";
-			$this->deptName = "";
+			$this->nw1Id = "";
+			$this->nwName = "";
+			$this->nwText = "";
 
 			//部署情報取得
 			if($_SESSION["Mode"] == "INSERT")
 			{
 				$this->flayCall = false;
 			}else{
-				$this->flay = new fSysDeptDisplay($_SESSION["userId"]);
+				$this->flay = new fNetNw1Display($_SESSION["userId"]);
 			}
 		}
 
@@ -36,20 +38,22 @@
 				goNext($_SESSION["SysPrev"]);
 			}else if(isset($_POST["update"])){
 				if($_SESSION["Mode"] == "INSERT"){
-					$flayEdit = new fSysDeptAdd($_SESSION["userId"]);
+					$flayEdit = new fNetNw1Add($_SESSION["userId"]);
 				}else if($_SESSION["Mode"] == "UPDATE"){
-					$flayEdit = new fSysDeptUpdate($_SESSION["userId"]);
+					$flayEdit = new fNetNw1Update($_SESSION["userId"]);
 				}else{
-					$flayEdit = new fSysDeptDelete($_SESSION["userId"]);
+					$flayEdit = new fNetNw1Delete($_SESSION["userId"]);
 				}
 				if($_SESSION["Mode"] == "UPDATE" or $_SESSION["Mode"] == "DELETE")
 				{
-					$flayEdit->setDeptId($_SESSION["SysDeptId"]);
+					$flayEdit->setNw1Id($_SESSION["NetNw1Id"]);
 				}
 				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE")
 				{
-					$this->deptName = $_POST["deptName"];
-					$flayEdit->setDeptName($_POST["deptName"]);
+					$this->nwName = $_POST["nwName"];
+					$flayEdit->setnwName($_POST["nwName"]);
+					$this->nwText = $_POST["nwText"];
+					$flayEdit->setnwText($_POST["nwText"]);
 				}
 				$flayEdit->run();
 				if($flayEdit->getResult() == true)
@@ -63,13 +67,13 @@
 
 			if($_SESSION["Mode"] == "INSERT"){
 				$this->flayCall = false;
-				$this->title = "部署登録";
+				$this->title = "大分類ネットワーク登録";
 			}else if($_SESSION["Mode"] == "UPDATE"){
-				$this->flay->setDeptId($_SESSION["SysDeptId"]);
-				$this->title = "部署名変更";
+				$this->flay->setNw1Id($_SESSION["NetNw1Id"]);
+				$this->title = "大分類ネットワーク変更";
 			}else{
-				$this->flay->setDeptId($_SESSION["SysDeptId"]);
-				$this->title = "部署削除";
+				$this->flay->setNw1Id($_SESSION["NetNw1Id"]);
+				$this->title = "大分類ネットワーク削除";
 			}
 
 		}
@@ -82,11 +86,12 @@
 				//初期表示
 				if($_SESSION["Mode"] == "UPDATE")
 				{
-					$this->deptName = $this->flay->getDeptName();
+					$this->nwName = $this->flay->getNwName();
+					$this->nwText = $this->flay->getNwText();
 				}else if($_SESSION["Mode"] == "DELETE")
 				{
-					$flayCheck = new fSysDeptDeleteCheck($_SESSION["userId"]);
-					$flayCheck->setDeptId($_SESSION["SysDeptId"]);
+					$flayCheck = new fNetNw1DeleteCheck($_SESSION["userId"]);
+					$this->flay->setNw1Id($_SESSION["NetNw1Id"]);
 					$flayCheck->run();
 					$this->setMessage($flayCheck->getMessage());
 					$this->delFlg = $flayCheck->getDelFlg();
@@ -99,13 +104,16 @@
 				{
 ?>
 <TR>
-<TD align="right">部署名：</TD>
-<TD><input type="text" name="deptName" value="<?php print($this->deptName);?>" maxlength="<?php print(DeptLen) ?>"></TD>
+<TD align="right">ネットワーク名：</TD>
+<TD><input type="text" name="nwName" value="<?php print($this->nwName);?>" maxlength="<?php print(NwLen) ?>"></TD>
 </TR>
+<TD align="right">説明：</TD>
+<TD><input type="text" name="nwText" value="<?php print($this->nwText);?>" maxlength="<?php print(NwTextLen) ?>"></TD>
 <?php
 				}else{
 ?>
-<TR><TD align="right">部署名：</TD><TD><?php print($this->flay->getDeptName());?></TD></TR>
+<TR><TD align="right">ネットワーク名：</TD><TD><?php print($this->flay->getNwName());?></TD></TR>
+<TD align="right">説明：</TD><TD><?php print($this->flay->getNwText());?></TD></TR>
 <?php
 				}
 ?>
@@ -137,7 +145,7 @@
 	}
 
 	//処理実行部
-	$play = new pSysDeptEdit("部署管理");
+	$play = new pNetNw1Edit("部署管理");
 	$play->display();
 
 ?>

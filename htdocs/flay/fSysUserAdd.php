@@ -138,6 +138,12 @@
 				return(false);
 			}
 
+			if(checkName($this->userName) == false)
+			{
+				$this->msg = getMsg($this->dbc,"SYS015");
+				return(false);
+			}
+
 			if($this->passWd1 == "")
 			{
 				$this->msg = getMsg($this->dbc,"SYS012");

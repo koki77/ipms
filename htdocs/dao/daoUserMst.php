@@ -226,7 +226,7 @@
 			$this->auth08 = 0;
 			$this->auth09 = 0;
 			$this->auth10 = 0;
-			$this->delflg = "";
+			$this->delflg = FlgTrue;
 		}
 
 		//Dao編集

@@ -22,7 +22,6 @@
 			$this->cnt = 0;
 			while($max > $this->cnt)
 			{
-				$this->initLine();
 				$this->getLine();
 				$this->cnt++;
 			}
@@ -35,13 +34,14 @@
 		}
 
 		//1件取得
-		private function getLine()
+		protected function getLine()
 		{
 			$this->dao = $this->dlay->fetch();
 			if($this->dao == null)
 			{
 				abend();
 			}else{
+				$this->initLine();
 				$this->getLineData();
 			}
 		}
