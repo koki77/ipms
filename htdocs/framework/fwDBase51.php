@@ -1,14 +1,15 @@
 <?php
 	/**
-	 * fwDBase50
-	 *  データベースアクセス基底クラス(集計処理 検索キー無し)
+	 * fwDBase51
+	 *  データベースアクセス基底クラス(集計処理 検索キー有り)
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
 	 * since       2016/02/18
 	 */
-	class fwDBase50
+	class fwDBase51
 	{
 		protected $sql;
+		protected $prm;
 		protected $dao;
 		private $con;
 		private $stmt;
@@ -30,7 +31,7 @@
 		{
 			try{
 				$this->stmt = $this->con->prepare($this->sql);
-				$this->stmt->execute();
+				$this->stmt->execute($this->prm);
 			}catch (PDOException $e){
     			print('Error:'.$e->getMessage());
     			die();

@@ -88,7 +88,7 @@
 			{
 				$this->msg = getMsg($this->dbc,"SYS001");
 			}else{
-				if($this->daoUserMst->getPassWd() == $this->passWd  && $this->daoUserMst->getDelFlg() == FlgOff)
+				if($this->daoUserMst->getPassWd() == $this->passWd  && $this->daoUserMst->getDelFlg() == FlgFalse)
 				{
 					$this->result = true;
 					authoritySet($this->daoUserMst);

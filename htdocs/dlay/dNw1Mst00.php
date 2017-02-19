@@ -11,7 +11,7 @@
 	class dNw1Mst00 extends fwDBase00
 	{
 		protected $sqls = "SELECT * FROM nw1_mst WHERE nw1_id = ?";
-		protected $sqli = "INSERT INTO nw1_mst (nw1_id,sortnum,nwnm,nwtext,delflg,create_userid,create_usernm,create_deptid,create_deptnm,create_date,update_userid,update_usernm,update_deptid,update_deptnm,update_date) VALUES (?,?,?,?,?,?,?,?,?,now(),?,?,?,?,now())";
+		protected $sqli = "INSERT INTO nw1_mst VALUES (?,?,?,?,?,?,?,?,?,now(),?,?,?,?,now())";
 		protected $sqlu = "UPDATE nw1_mst set nw1_id = ?,sortnum = ?,nwnm = ?,nwtext = ?,delflg = ?,update_userid = ?,update_usernm = ?,update_deptid = ?,update_deptnm = ?,update_date = now() WHERE nw1_id = ?";
 		protected $sqld = "DELETE FROM nw1_mst WHERE nw1_id = ?";
 

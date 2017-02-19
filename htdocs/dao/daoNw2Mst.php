@@ -241,7 +241,7 @@
 
 		public function getAddr()
 		{
-			return(editAddr($this->addr1,$this->addr2,$this->addr3,$this->addr4))
+			return(editAddr($this->addr1,$this->addr2,$this->addr3,$this->addr4));
 		}
 
 		public function getMask()

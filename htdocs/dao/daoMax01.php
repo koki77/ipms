@@ -33,10 +33,6 @@
 		function setDao($result)
 		{
 			$this->max = $result["maxval"];
-			if($this->max == NULL)
-			{
-				$this->max = 0;
-			}
 		}
 	}
 

@@ -1,13 +1,13 @@
 <?php
 	/**
-	 * fNetNw1List
-	 *  大分類ネットワークマスタ一覧
+	 * fNetNw1List1
+	 *  大分類ネットワークマスタ一覧（管理権限判定）
 	 *
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
 	 * since       2016/02/16
 	 */
-	class fNetNw1List extends fwFBase02
+	class fNetNw1List1 extends fwFBase02
 	{
 		//変数宣言
 		private $nw1Id;
@@ -23,11 +23,6 @@
 			$this->nwName = array();
 			$this->nwText = array();
 			$this->dspcnt = 0;
-
-			//ユーザ情報取得
-			$this->flayUser = new fSysUserDisplay($this->uId);
-			$this->flayUser->setUserId($this->uId);
-			$this->flayUser->run();
 		}
 
 		//明細行数取得
@@ -58,6 +53,15 @@
 			$this->dlay = new dNw1Mst01($this->dbc);
 		}
 
+		//画面表示データ取得
+		protected function getData()
+		{
+			//ユーザ情報取得
+			$this->flayUser = new fSysUserDisplay($this->uId);
+			$this->flayUser->setUserId($this->uId);
+			$this->flayUser->run();
+		}
+
 		//明細データ取得
 		protected function getLineData()
 		{
@@ -70,7 +74,7 @@
 		//明細行初期化
 		protected function initLine()
 		{
-			$this->nwId[$this->dspcnt] = 0;
+			$this->nw1Id[$this->dspcnt] = 0;
 			$this->nwName[$this->dspcnt] = "";
 			$this->nwText[$this->dspcnt] = "";
 		}

@@ -98,36 +98,68 @@
 
 	}
 
+	//IPアドレス形式チェック
+	function checkIpAddr($str)
+	{
+		$addrArray1 = explode(".",$str);
+		if(count($addrArray1) != 4)
+		{
+			return(false);
+		}
+
+		if(ctype_digit($addrArray1[0]) == false)
+		{
+			return(false);
+		}
+
+		if(ctype_digit($addrArray1[1]) == false)
+		{
+			return(false);
+		}
+
+		if(ctype_digit($addrArray1[2]) == false)
+		{
+			return(false);
+		}
+
+		if(ctype_digit($addrArray1[3]) == false)
+		{
+			return(false);
+		}
+
+		$addrArray2[0] = intval($addrArray1[0]);
+		$addrArray2[1] = intval($addrArray1[1]);
+		$addrArray2[2] = intval($addrArray1[2]);
+		$addrArray2[3] = intval($addrArray1[3]);
+
+		if($addrArray2[0] < 0 || $addrArray2[0] > 255)
+		{
+			return(false);
+		}
+
+		if($addrArray2[1] < 0 || $addrArray2[1] > 255)
+		{
+			return(false);
+		}
+
+		if($addrArray2[2] < 0 || $addrArray2[2] > 255)
+		{
+			return(false);
+		}
+
+		if($addrArray2[3] < 0 || $addrArray2[3] > 255)
+		{
+			return(false);
+		}
+
+		return(true);
+
+	}
+
 	//IPアドレス編集
 	function editAddr($addr1,$addr2,$addr3,$addr4)
 	{
 		return($addr1.".".$addr2.".".$addr3.".".$addr4);
-	}
-
-	//表示用サブネットマスク
-	function getDispMask($mask)
-	{
-		switch($mask)
-		{
-			case 24:
-				return("255.255.255.0");
-			case 25:
-				return("255.255.255.128");
-			case 26:
-				return("255.255.255.192");
-			case 27:
-				return("255.255.255.224");
-			case 28:
-				return("255.255.255.240");
-			case 29:
-				return("255.255.255.248");
-			case 30:
-				return("255.255.255.252");
-			case 31:
-				return("255.255.255.254");
-			case 32:
-				return("255.255.255.255");
-		}
 	}
 
 ?>

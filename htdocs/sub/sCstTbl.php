@@ -20,12 +20,16 @@
 	const NwAdminIdx = 2;
 
 	//定数定義
-	const FlgOn = 1;
-	const FlgOff = 0;
 	const FlgTrue = 1;
 	const FlgFalse = 0;
 	const DeptAll = -1;
 
+	//アドレス重複区分
+	const DupKbNG = 1;
+	const DupKbNw1OK = 2;
+	const DupKbOK = 3;
+
+	//入力長
 	const UserIdLen = 20;
 	const PassLen = 20;
 	const NameLen = 10;

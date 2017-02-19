@@ -51,9 +51,9 @@
 				if($_SESSION["Mode"] == "INSERT" or $_SESSION["Mode"] == "UPDATE")
 				{
 					$this->nwName = $_POST["nwName"];
-					$flayEdit->setnwName($_POST["nwName"]);
+					$flayEdit->setNwName($_POST["nwName"]);
 					$this->nwText = $_POST["nwText"];
-					$flayEdit->setnwText($_POST["nwText"]);
+					$flayEdit->setNwText($_POST["nwText"]);
 				}
 				$flayEdit->run();
 				if($flayEdit->getResult() == true)
@@ -107,13 +107,15 @@
 <TD align="right">ネットワーク名：</TD>
 <TD><input type="text" name="nwName" value="<?php print($this->nwName);?>" maxlength="<?php print(NwLen) ?>"></TD>
 </TR>
+<TR>
 <TD align="right">説明：</TD>
 <TD><input type="text" name="nwText" value="<?php print($this->nwText);?>" maxlength="<?php print(NwTextLen) ?>"></TD>
+</TR>
 <?php
 				}else{
 ?>
 <TR><TD align="right">ネットワーク名：</TD><TD><?php print($this->flay->getNwName());?></TD></TR>
-<TD align="right">説明：</TD><TD><?php print($this->flay->getNwText());?></TD></TR>
+<TR><TD align="right">説明：</TD><TD><?php print($this->flay->getNwText());?></TD></TR>
 <?php
 				}
 ?>
@@ -145,7 +147,7 @@
 	}
 
 	//処理実行部
-	$play = new pNetNw1Edit("部署管理");
+	$play = new pNetNw1Edit("大分類ネットワーク管理");
 	$play->display();
 
 ?>

@@ -103,4 +103,6 @@
     [root@CentOS7 sql]# mysql -u ipms -p ipmsdb < user_mst.sql
     [root@CentOS7 sql]# mysql -u ipms -p ipmsdb < nw1_mst.sql
     [root@CentOS7 sql]# mysql -u ipms -p ipmsdb < nw2_mst.sql
+    [root@CentOS7 sql]# mysql -u ipms -p ipmsdb < nw_admin_mst.sql
+    [root@CentOS7 sql]# mysql -u ipms -p ipmsdb < code_mst.sql
     ```

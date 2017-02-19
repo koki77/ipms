@@ -17,7 +17,6 @@
 		//初期化処理
 		protected function init()
 		{
-		$this->userId = array();
 			$this->deptName = array();
 			$this->deptId = array();
 			$this->prmDeptId = 0;
