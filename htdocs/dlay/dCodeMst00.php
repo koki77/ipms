@@ -11,10 +11,10 @@
 	 */
 	class dCodeMst00 extends fwDBase00
 	{
-		protected $sqls = "SELECT * FROM code_mst WHERE codekb = ?,codeid = ?";
+		protected $sqls = "SELECT * FROM code_mst WHERE codekb = ? and codeid = ?";
 		protected $sqli = "INSERT INTO code_mst VALUES (?,?,?)";
-		protected $sqlu = "UPDATE code_mst set codekb = ?,codeid = ?, codename = ? WHERE  codekb = ?,codeid = ?";
-		protected $sqld = "DELETE FROM code_mst WHERE  codekb = ?,codeid = ?";
+		protected $sqlu = "UPDATE code_mst set codekb = ?,codeid = ?, codename = ? WHERE  codekb = ? and codeid = ?";
+		protected $sqld = "DELETE FROM code_mst WHERE  codekb = ? and codeid = ?";
 
 		//Dao生成
 		protected function createDao()

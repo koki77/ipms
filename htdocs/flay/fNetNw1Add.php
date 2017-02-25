@@ -38,13 +38,7 @@
 		protected function inputCheck()
 		{
 			//単体チェック
-			if($this->nwName == "")
-			{
-				$this->msg = getMsg($this->dbc,"NET003");
-				return(false);
-			}
-
-			if(checkName($this->nwName) == false)
+			if(checkSpaceStr($this->nwName) == false)
 			{
 				$this->msg = getMsg($this->dbc,"NET003");
 				return(false);

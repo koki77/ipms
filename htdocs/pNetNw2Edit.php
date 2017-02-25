@@ -99,7 +99,7 @@
 				{
 					$this->nwName = $this->flay->getNwName();
 					$this->nwText = $this->flay->getNwText();
-					$this->addr = $this->flay->getDisplayAddr();
+					$this->addr = $this->flay->getAddr();
 					$this->mask = $this->flay->getMask();
 					$this->dupFlg = $this->flay->getDupFlg();
 			}else if($_SESSION["Mode"] == "DELETE")
@@ -188,7 +188,7 @@
 ?>
 <TR><TD align="right">ネットワーク名：</TD><TD><?php print($this->flay->getNwName());?></TD></TR>
 <TR><TD align="right">説明：</TD><TD><?php print($this->flay->getNwText());?></TD></TR>
-<TR><TD align="right">アドレス：</TD><TD><?php print($this->flay->getDisplayAddr());?></TD></TR>
+<TR><TD align="right">アドレス：</TD><TD><?php print($this->flay->getAddr());?></TD></TR>
 <TR><TD align="right">ネットマスク：</TD><TD><?php print($this->flay->getDisplayMask());?></TD></TR>
 <TR><TD align="right">アドレス重複：</TD><TD><?php print($this->flay->getDisplayDupFlg());?></TD></TR>
 <?php

@@ -26,7 +26,7 @@
 
 	//アドレス重複区分
 	const DupKbNG = 1;
-	const DupKbNw1OK = 2;
+	const DupKbNw1NG = 2;
 	const DupKbOK = 3;
 
 	//入力長

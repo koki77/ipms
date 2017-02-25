@@ -32,7 +32,7 @@
 			$this->deptName = "";
 		}
 
-		//ユーザ名取得
+		//部署名取得
 		protected function getData()
 		{
 			//DB検索

@@ -39,7 +39,7 @@
 			$this->nwText = "";
 		}
 
-		//ユーザ名取得
+		//大分類ネットワーク取得
 		protected function getData()
 		{
 			//DB検索

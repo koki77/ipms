@@ -83,9 +83,13 @@
 		}
 	}
 
-	//名チェック(空白のみの場合エラー)
-	function checkName($str)
+	//スペース文字列チェック(空白のみの場合エラー)
+	function checkSpaceStr($str)
 	{
+		if($str == "")
+		{
+			return(false);
+		}
 		if(preg_match("/ /",$str))
 		{
 			return(false);
@@ -154,6 +158,48 @@
 
 		return(true);
 
+	}
+
+	//ネットワークアドレスチェック
+	function checkNetworkAddr($addr,$mask)
+	{
+		$addrArray = explode(".",$addr);
+		$addr4 = intval($addrArray[3]);
+
+		if($addr4 % getNumMask($mask) != 0)
+		{
+			return(false);
+		}
+
+		return(true);
+	}
+
+	//ブロードキャストIP取得
+	function getBroadCastIP($addr4,$mask)
+	{
+		return($addr4 + getNumMask($mask) - 1);
+	}
+
+	//Mask変換
+	function getNumMask($mask)
+	{
+		switch($mask)
+		{
+			case "24":
+				return(256);
+			case "25":
+				return(128);
+			case "26":
+				return(64);
+			case "27":
+				return(32);
+			case "28":
+				return(16);
+			case "29":
+				return(8);
+			case "30":
+				return(4);
+		}
 	}
 
 	//IPアドレス編集

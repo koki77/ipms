@@ -98,7 +98,7 @@
 				case 10:
 					return($this->auth10);
 					break;
-			}		
+			}
 		}
 
 		//初期化処理
@@ -121,7 +121,7 @@
 			$this->auth10 = FlgFalse;
 		}
 
-		//ユーザ名取得
+		//ユーザ情報取得
 		protected function getData()
 		{
 			//DB検索

@@ -132,13 +132,7 @@
 				return(false);
 			}
 
-			if($this->userName == "")
-			{
-				$this->msg = getMsg($this->dbc,"SYS014");
-				return(false);
-			}
-
-			if(checkName($this->userName) == false)
+			if(checkSpaceStr($this->userName) == false)
 			{
 				$this->msg = getMsg($this->dbc,"SYS015");
 				return(false);

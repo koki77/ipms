@@ -29,13 +29,7 @@
 		protected function inputCheck()
 		{
 			//単体チェック
-			if($this->deptName == "")
-			{
-				$this->msg = getMsg($this->dbc,"SYS015");
-				return(false);
-			}
-
-			if(checkName($this->deptName) == false)
+			if(checkSpaceStr($this->deptName) == false)
 			{
 				$this->msg = getMsg($this->dbc,"SYS015");
 				return(false);
