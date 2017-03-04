@@ -21,7 +21,7 @@
 		private $addr4;//アドレス（第４オクテット）
 		private $mask;//ネットマスク（ビット）
 		private $updateFlg;//更新フラグ（新規払い出し可否）
-		private $delFlg;//削除フラグ
+		private $delflg;//削除フラグ
 		private $createUserId;//作成ユーザID
 		private $createUserName;//作成ユーザ名
 		private $createDeptId;//作成部署ID
@@ -329,7 +329,7 @@
 			$this->addr4 = 0;
 			$this->mask = 0;
 			$this->updateFlg = 0;
-			$this->delFlg = FlgTrue;
+			$this->delflg = FlgTrue;
 			$this->createUserId = "";
 			$this->createUserName = "";
 			$this->createDeptId = 0;

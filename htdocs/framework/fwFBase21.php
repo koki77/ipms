@@ -1,17 +1,18 @@
 <?php
 	/**
-	 * fwFBase20
-	 *  データ更新機能基底クラス(２dao 追加)
+	 * fwFBase21
+	 *  データ更新機能基底クラス(同一dao 複数件追加)
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * since       2016/02/18
+	 * since       2016/03/04
 	 */
-	class fwFBase20 extends fwFBase00
+	class fwFBase21 extends fwFBase00
 	{
-		protected $dlay1;
-		protected $dao1;
-		protected $dlay2;
-		protected $dao2;
+		protected $dlay;
+		protected $dao;
+		protected $insertCnt;
+		protected $cnt;
+		protected $insertFlg;
 		protected $insertMsg = "SYS002";
 		protected $errorMsg = "SYS003";
 		protected $result;
@@ -27,20 +28,28 @@
 				//関連チェック
 				if($this->relationCheck() == true)
 				{
-					$this->setInsertData();
-					$this->dlay1->setInsertPrm($this->dao1);
-					if($this->dlay1->insert() == true)
+					$this->setInsertCount();
+					$this->cnt = 0;
+					$resultFlg = FlgTrue;
+					while($this->insertCnt > $this->cnt)
 					{
-						$this->dlay2->setInsertPrm($this->dao2);
-						if($this->dlay2->insert() == true)
+						$this->setInsertData();
+						if($this->insertFlg == FlgTrue)
 						{
-							$this->msg = getMsg($this->dbc,$this->insertMsg);
-							$this->result = true;
-							$this->dbc->Commit();
-						}else{
-							$this->msg = getMsg($this->dbc,$this->errorMsg);
-							$this->dbc->RollBack();
+							$this->dlay->setInsertPrm($this->dao);
+							if($this->dlay->insert() == false)
+							{
+								$resultFlg = FlgFalse;
+								$this->cnt = $this->insertCnt;
+							}
 						}
+						$this->cnt++;
+					}
+					if($resultFlg == FlgTrue)
+					{
+						$this->msg = getMsg($this->dbc,$this->insertMsg);
+						$this->result = true;
+						$this->dbc->Commit();
 					}else{
 						$this->msg = getMsg($this->dbc,$this->errorMsg);
 						$this->dbc->RollBack();
@@ -59,6 +68,11 @@
 		protected function relationCheck()
 		{
 			return(true);
+		}
+
+		//インサート件数設定
+		protected function setInsertCount()
+		{
 		}
 
 		//追加データ設定

@@ -1,18 +1,20 @@
 ﻿<?php
 	/**
-	 * daoNw1Mst
-	 *  大分類ネットワークマスタ用Data Access Object
+	 * daoHostMst
+	 *  ホスト名マスタ用Data Access Object
 	 *
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * since       2016/02/16
+	 * since       2016/02/25
 	 */
-	class daoNw1Mst
+	class daoHostMst
 	{
-		private $nw1Id;//大分類ネットワークID
-		private $sortNum;//ソート順
-		private $nwName;//ネットワーク名
-		private $nmText;//コメント
+		private $hostId;//ホストID
+		private $historyNo;//履歴番号
+		private $hostName;//ホスト名
+		private $hostText;//コメント
+		private $hostType;//ホスト種別
+		private $updateKb;//更新区分
 		private $delflg;//削除フラグ
 		private $createUserId;//作成ユーザID
 		private $createUserName;//作成ユーザ名
@@ -32,24 +34,34 @@
 		}
 
 		//値設定
-		public function setNw1Id($val)
+		public function setHostId($val)
 		{
-			$this->nw1Id = $val;
+			$this->hostId = $val;
 		}
 
-		public function setSortNum($val)
+		public function setHistoryNo($val)
 		{
-			$this->sortNum = $val;
+			$this->historyNo = $val;
 		}
 
-		public function setNwName($val)
+		public function setHostName($val)
 		{
-			$this->nwName = $val;
+			$this->hostName = $val;
 		}
 
-		public function setNwText($val)
+		public function setHostText($val)
 		{
-			$this->nwText = $val;
+			$this->hostText = $val;
+		}
+
+		public function setHostType($val)
+		{
+			$this->hostType = $val;
+		}
+
+		public function setUpdateKb($val)
+		{
+			$this->updateKb = $val;
 		}
 
 		public function setDelflg($val)
@@ -132,24 +144,34 @@
 		}
 
 		//値取得
-		public function getNw1Id()
+		public function getHostId()
 		{
-			return($this->nw1Id);
+			return($this->hostId);
 		}
 
-		public function getSortNum()
+		public function getHistoryNo()
 		{
-			return($this->sortNum);
+			return($this->historyNo);
 		}
 
-		public function getNwName()
+		public function getHostName()
 		{
-			return($this->nwName);
+			return($this->hostName);
 		}
 
-		public function getNwText()
+		public function getHostText()
 		{
-			return($this->nwText);
+			return($this->hostText);
+		}
+
+		public function getHostType()
+		{
+			return($this->hostType);
+		}
+
+		public function getUpdateKb()
+		{
+			return($this->updateKb);
 		}
 
 		public function getDelflg()
@@ -210,10 +232,12 @@
 		//初期化
 		public function initVal()
 		{
-			$this->nw1Id = 0;
-			$this->sortnum = 0;
-			$this->nwName = "";
-			$this->nmText = "";
+			$this->hostId = 0;
+			$this->historyNo = 0;
+			$this->hostName = "";
+			$this->hostText = "";
+			$this->hostType = 0;
+			$this->updateKb = 0;
 			$this->delflg = FlgTrue;
 			$this->createUserId = "";
 			$this->createUserName = "";
@@ -230,10 +254,12 @@
 		//Dao編集
 		function setDao($result)
 		{
-			$this->setNw1Id($result["nw1_id"]);
-			$this->setSortNum($result["sortnum"]);
-			$this->setNwName($result["nwnm"]);
-			$this->setNwText($result["nwtext"]);
+			$this->setHostId($result["host_id"]);
+			$this->setHistoryNo($result["history_no"]);
+			$this->setHostName($result["host_nm"]);
+			$this->setHostText($result["host_text"]);
+			$this->setHostType($result["host_type"]);
+			$this->setUpdateKb($result["update_kb"]);
 			$this->setDelflg($result["delflg"]);
 			$this->setCreateUserId($result["create_userid"]);
 			$this->setCreateUserName($result["create_usernm"]);

@@ -180,6 +180,31 @@
 		return($addr4 + getNumMask($mask) - 1);
 	}
 
+	//ホスト名チェック(半角英数、ピリオド以外の場合エラー)
+	function checkHostName($str)
+	{
+		$hostArray = explode(".",$str);
+
+		$max = count($hostArray);
+		$cnt = 0;
+		while($max > $cnt)
+		{
+			//スペースのみの場合エラー
+			if(checkSpaceStr($hostArray[$cnt]) == false)
+			{
+				return(false);
+			}
+			//半角英数以外の場合エラー
+			if(checkAscii($hostArray[$cnt]) == false)
+			{
+				return(false);
+			}
+			$cnt++;
+		}
+
+		return(true);
+	}
+
 	//Mask変換
 	function getNumMask($mask)
 	{

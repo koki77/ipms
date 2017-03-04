@@ -22,7 +22,7 @@
 		{
 			if(isset($_POST["SYS010"]))
 			{
-				goNext("pMemMemberAdd.php");
+				goNext("pHstReserve1.php");
 			}else if(isset($_POST["SYS110"])){
 				goNext("pNetNw1Manage.php");
 			}else if(isset($_POST["SYS900"])){
@@ -42,9 +42,7 @@
 		protected function dspMain()
 		{
 ?>
-<button type="submit" name="SYS010" class="btn0" tabindex=010>IPアドレス参照</button><br>
-<button type="submit" name="SYS020" class="btn0" tabindex=020>IPアドレス取得</button><br>
-<button type="submit" name="SYS030" class="btn0" tabindex=030>IPアドレス返却</button><br>
+<button type="submit" name="SYS010" class="btn0" tabindex=010>ホスト名予約</button><br>
 <button type="submit" name="SYS100" class="btn0" tabindex=100>ネットワーク参照</button><br>
 <?php
 	if(authorityGet(NwAdmin) == FlgTrue || authorityGet(SysAdmin) == FlgTrue)

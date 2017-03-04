@@ -22,12 +22,21 @@
 	//定数定義
 	const FlgTrue = 1;
 	const FlgFalse = 0;
+	const FlgHistory = 2;
 	const DeptAll = -1;
 
 	//アドレス重複区分
 	const DupKbNG = 1;
 	const DupKbNw1NG = 2;
 	const DupKbOK = 3;
+
+	//ホスト更新区分
+	const HostUpdInsert = 1;
+	const HostUpdDelete = 2;
+	const HostUpdIPAdd = 3;
+	const HostUpdIPChange = 4;
+	const HostUpdIPDel = 5;
+	const HostUpdNameChange = 6;
 
 	//入力長
 	const UserIdLen = 20;
@@ -36,6 +45,8 @@
 	const DeptLen = 40;
 	const NwLen = 40;
 	const NwTextLen = 100;
+	const HostLen = 50;
+	const HostTextLen = 100;
 	const SortInterval = 10;
 	const YYLen = 4;
 	const MMLen = 2;
