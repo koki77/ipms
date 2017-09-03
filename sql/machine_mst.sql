@@ -1,0 +1,20 @@
+﻿CREATE TABLE machine_mst(
+machine_id int,
+history_no int,
+model_id int,
+rackid int,
+rackpos int,
+update_kb int,
+delflg int,
+create_userid  varchar(20) NOT NULL,
+create_usernm  varchar(100) NOT NULL,
+create_deptid int,
+create_deptnm varchar(100),
+create_date datetime,
+update_userid  varchar(20) NOT NULL,
+update_usernm  varchar(100) NOT NULL,
+update_deptid int,
+update_deptnm varchar(100),
+update_date datetime,
+PRIMARY KEY(machine_id,history_no)
+);
