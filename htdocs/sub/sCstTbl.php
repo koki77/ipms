@@ -23,6 +23,7 @@
 	const FlgTrue = 1;
 	const FlgFalse = 0;
 	const FlgHistory = 2;
+	const FlgDummy = 3;
 	const DeptAll = -1;
 
 	//アドレス重複区分
@@ -31,12 +32,13 @@
 	const DupKbOK = 3;
 
 	//ホスト更新区分
-	const HostUpdInsert = 1;
-	const HostUpdDelete = 2;
-	const HostUpdIPAdd = 3;
-	const HostUpdIPChange = 4;
-	const HostUpdIPDel = 5;
-	const HostUpdNameChange = 6;
+	const HostUpdNone = 1;
+	const HostUpdReserve = 2;
+	const HostUpdDelete = 3;
+	const HostUpdIPAdd = 4;
+	const HostUpdIPChange = 5;
+	const HostUpdIPDel = 6;
+	const HostUpdNameChange = 7;
 
 	//入力長
 	const UserIdLen = 20;

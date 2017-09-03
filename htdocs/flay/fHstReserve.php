@@ -33,11 +33,6 @@
 			$this->hostText = $val;
 		}
 
-		public function sethostType($val)
-		{
-			$this->hostType = $val;
-		}
-
 		//入力チェック
 		protected function inputCheck()
 		{
@@ -48,8 +43,11 @@
 				//単体チェック
 				if(checkSpaceStr($this->hostName[$cnt]) == true)
 				{
-					if(checkHostName($this->hostName[$cnt]) == false)
+					if(checkHostName($this->hostName[$cnt]) == true)
 					{
+						//小文字変換
+						$this->hostName[$cnt] = mb_strtolower($this->hostName[$cnt]);
+					}else{
 						$this->msg = getMsg($this->dbc,"HST002")."[".$this->hostName[$cnt]."]";
 						return(false);
 					}
@@ -148,9 +146,9 @@
 				$this->dao->setHistoryNo(0);
 				$this->dao->setHostName($this->hostName[$this->cnt]);
 				$this->dao->setHostText($this->hostText[$this->cnt]);
-				$this->dao->setHostType($this->hostType[$this->cnt]);
+				$this->dao->setHostType(0);
 				$this->dao->setUserId($this->uId);
-				$this->dao->setUpdateKb(HostUpdInsert);
+				$this->dao->setUpdateKb(HostUpdReserve);
 				$this->dao->setDelFlg(FlgFalse);
 				//ユーザ情報取得
 				$flayUser = new fSysUserDisplay($this->uId);

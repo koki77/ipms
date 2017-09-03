@@ -7,7 +7,7 @@
 	 *		codeId
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * since       2016/02/19
+	 * since       2017/02/19
 	 */
 	class dCodeMst00 extends fwDBase00
 	{

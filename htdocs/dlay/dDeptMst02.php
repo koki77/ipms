@@ -6,7 +6,7 @@
 	 *		deptId
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * since       2016/02/11
+	 * since       2017/02/11
 	 */
 	class dDeptMst02 extends fwDBase02
 	{
@@ -17,7 +17,7 @@
 		{
 			return(new daoDeptMst());
 		}
-		
+
 		//検索キー設定
 		public function setSelectPrm($deptid)
 		{

@@ -11,7 +11,6 @@
 	{
 		private $hostName;
 		private $hostText;
-		private $hostType;
 		private $maxLine;
 
 		//初期化処理
@@ -20,7 +19,6 @@
 			//変数初期化
 			$this->hostName = array();
 			$this->hostText = array();
-			$this->hostType = array();
 
 			//入力行数設定
 			$this->maxLine = 10;
@@ -31,7 +29,6 @@
 			{
 				$this->hostName[$cnt] = "";
 				$this->hostText[$cnt] = "";
-				$this->hostType[$cnt] = 0;
 				$cnt++;
 			}
 
@@ -53,12 +50,10 @@
 				{
 					$this->hostName[$cnt] = $_POST["hostName".$cnt];
 					$this->hostText[$cnt] = $_POST["hostText".$cnt];
-					$this->hostType[$cnt] = $_POST["hostType".$cnt];
 					$cnt++;
 				}
 				$flayEdit->setHostName($this->hostName);
 				$flayEdit->setHostText($this->hostText);
-				$flayEdit->setHostType($this->hostType);
 				$flayEdit->run();
 				if($flayEdit->getResult() == true)
 				{
@@ -79,7 +74,6 @@
 <TR class="header">
 <TD width="100px" align="center">ホスト名</TD>
 <TD width="400px" align="center">説明</TD>
-<TD width="100px" align="center">ホスト種別</TD>
 </TR>
 <?php
 			$cnt1 = 0;
@@ -89,26 +83,6 @@
 <TR>
 <TD><input type="text" name="hostName<?php print($cnt1);?>" value="<?php print($this->hostName[$cnt1]);?>" maxlength="<?php print(HostLen) ?>"></TD>
 <TD><input type="text" name="hostText<?php print($cnt1);?>" value="<?php print($this->hostText[$cnt1]);?>" maxlength="<?php print(HostTextLen) ?>"></TD>
-<TD>
-<select name="hostType<?php print($cnt1);?>">
-<?php
-				$cnt2 = 0;
-				while ($this->flay->getCount() > $cnt2)
-				{
-						if($this->flay->getCodeId($cnt2) == $this->hostType[$cnt1])
-						{
-							$sel = "selected";
-						}else{
-							$sel = "";
-						}
-?>
-<option value="<?php print($this->flay->getCodeId($cnt2));?>" <?php print($sel);?>><?php print($this->flay->getCodeName($cnt2));?></option>
-<?php
-						$cnt2++;
-				}
-?>
-</select>
-</TD>
 </TR>
 <?php
 				$cnt1++;

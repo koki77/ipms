@@ -1,6 +1,7 @@
 ﻿CREATE TABLE host_mst(
 host_id int AUTO_INCREMENT,
 history_no int,
+machine_id int,
 host_nm varchar(50),
 host_text varchar(100),
 host_type int,

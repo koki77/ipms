@@ -61,6 +61,9 @@
 		session_start();
 		if($_SESSION["userId"] == "")
 		{
+			//Debug start
+			print($_SESSION);
+			//Debug End
 			goLogin();
 		}
 	}

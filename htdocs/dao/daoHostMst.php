@@ -5,12 +5,13 @@
 	 *
 	 * author      Koki
 	 * environment PHP 5.4.16/Apache 2.4.6/MariaDB 5.5.52
-	 * since       2016/02/25
+	 * since       2017/02/25
 	 */
 	class daoHostMst
 	{
 		private $hostId;//ホストID
 		private $historyNo;//履歴番号
+		private $machineId;//機種ID
 		private $hostName;//ホスト名
 		private $hostText;//コメント
 		private $hostType;//ホスト種別
@@ -44,9 +45,14 @@
 			$this->historyNo = $val;
 		}
 
+		public function setMachineId($val)
+		{
+			$this->hostId = $val;
+		}
+
 		public function setHostName($val)
 		{
-			$this->hostName = $val;
+			$this->hostName = mb_strtolower($val);
 		}
 
 		public function setHostText($val)
@@ -154,6 +160,11 @@
 			return($this->historyNo);
 		}
 
+		public function getMachineId()
+		{
+			return($this->machineId);
+		}
+
 		public function getHostName()
 		{
 			return($this->hostName);
@@ -234,6 +245,7 @@
 		{
 			$this->hostId = 0;
 			$this->historyNo = 0;
+			$this->machineId = 0;
 			$this->hostName = "";
 			$this->hostText = "";
 			$this->hostType = 0;
@@ -256,6 +268,7 @@
 		{
 			$this->setHostId($result["host_id"]);
 			$this->setHistoryNo($result["history_no"]);
+			$this->setMachineId($result["machine_id"]);
 			$this->setHostName($result["host_nm"]);
 			$this->setHostText($result["host_text"]);
 			$this->setHostType($result["host_type"]);
